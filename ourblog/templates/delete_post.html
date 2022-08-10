@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Borrar El Post{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1>Borrar el Post</h1>
+
+<h3>Borrar: {{ post.titulo }}</h3>
+<br/>
+<div class="form-group">
+    <form method="POST">
+      {% csrf_token %}
+      <strong>Estas seguro?</strong><br/>
+      <button  class="btn btn-danger">Borrar</button>
+    </form>
+{% else %}      
+No tenes permiso para editar, registrate o logueate!
+<!--Esto sirve por si alguien copia el url y no esta logueado, le salta este cartel. Sino podria editar estando deslogueado-->
+{% endif %}        
+</div>
+
+
+
+
+{% endblock %}

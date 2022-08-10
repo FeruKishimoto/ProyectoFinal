@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Editar El Post{% endblock %}
+{% block content %}
+
+<h1>Actualizar el Post</h1>
+
+{% if user.is_authenticated %}
+ {% if user.id == 1 %}
+   <br/>
+   <div class="form-group">
+       <form method="POST">
+         {% csrf_token %}
+         {{ form.media }}
+         {{ form.as_p }}<!-- as_p es como si cada recuadro esta en un parrafo diferente-->
+         <button  class="btn btn-info">Actualizar</button>
+       </form>
+    
+    </div>
+  {% else %} 
+   No tenes permiso para tomar edicion!!
+  {% endif %}
+
+{% else %} 
+
+No tenes permiso para editar, registrate o logueate!
+<!--Esto sirve por si alguien copia el url y no esta logueado, le salta este cartel. Sino podria editar estando deslogueado-->
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.titulo_tag }}{% endblock %}<!-- {{ post.title }} hace que cada vez que entremos a algun post, la pestaña cambie acorde al titulo del post en cuestion--> 
+
+
+{% block content %}
+
+
+<h1> {{ post.titulo }} </h1>
+<small>By: 
+    {{ post.autor }} - 
+    {{ post.post_date }}  
+
+    {% if user.is_authenticated %} <!--El id del admin es 1, entonces solo el admin va a poder borrar o editar-->
+      {% if user.id == 1 %}
+    
+       <a href="{% url 'update_post' post.pk %}">(Editar)</a>
+       <a href="{% url 'delete_post' post.pk %}" class="text-danger">(Borrar)</a>
+      {% endif %}
+    {% endif %}
+</small<br/> 
+<hr>
+
+<br/>
+
+{% if post.header_image %} <!--Si hay una imagen posteada, se muestra-->
+<img src="{{ post.header_image.url }}">
+
+{% endif %}
+
+<br/><br/>
+{{ post.body|safe }}
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-success">Volver</a> <!--btn btn es el boton que me da bootstrap-->
+
+
+{% endblock %}
